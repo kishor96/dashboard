@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+   
+    <link
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    
+    
+
+
+</head>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Roboto", sans-serif;
+        background-color: #F1F4F6;
+    }
+
+    header {
+        z-index: 1;
+        position: fixed;
+        background: white;
+        padding: 20px;
+        width: calc(100% - 0%);
+        top: 0;
+        height: 30px;
+    }
+
+    .left_area h3 {
+        color: #fff;
+        margin: 0;
+        text-transform: uppercase;
+        font-size: 22px;
+        font-weight: 900;
+    }
+
+    .left_area span {
+        color: #69AA8A;
+    }
+
+    .logout_btn {
+        padding: 5px;
+        background: #19B3D3;
+        text-decoration: none;
+        float: right;
+        margin-top: -30px;
+        margin-right: 40px;
+        border-radius: 2px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+        transition: 0.5s;
+        transition-property: background;
+    }
+
+    .logout_btn:hover {
+        background: #0B87A6;
+    }
+
+    .sidebar {
+        z-index: 1;
+        top: 0;
+        background: white;
+        margin-top: 70px;
+        padding-top: 30px;
+        position: fixed;
+        left: 0;
+        width: 250px;
+        height: calc(100% - 9%);
+        transition: 0.5s;
+        transition-property: left;
+        overflow-y: auto;
+    }
+
+    .profile_info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sidebar .profile_info .profile_image {
+        width: 100px;
+        height: 100px;
+        border-radius: 100px;
+        margin-bottom: 10px;
+    }
+
+    .sidebar .profile_info h4 {
+        color: #ccc;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    .sidebar a {
+        color: #69AA8A;
+        display: block;
+        width: 100%;
+        line-height: 60px;
+        text-decoration: none;
+        padding-left: 40px;
+        box-sizing: border-box;
+        transition: 0.5s;
+        transition-property: background;
+    }
+
+    .sidebar a:hover {
+        background: #69aa8a;
+        color: white;
+    }
+
+    .sidebar i {
+        padding-right: 10px;
+    }
+
+    label #sidebar_btn {
+        z-index: 1;
+        color: black;
+        position: fixed;
+        cursor: pointer;
+        left: 300px;
+        font-size: 20px;
+        margin: 5px 0;
+        transition: 0.5s;
+        transition-property: color;
+    }
+
+    label #sidebar_btn:hover {
+        color: #69aa8a;
+    }
+
+    #check:checked~.sidebar {
+        left: -185px;
+    }
+
+    #check:checked~.sidebar a span {
+        display: none;
+    }
+
+    #check:checked~.sidebar a {
+        font-size: 20px;
+        margin-left: 165px;
+        width: 100%;
+    }
+
+    .content {
+        width: (100% - 250px);
+        margin-top: 60px;
+        padding: 20px;
+        margin-left: 250px;
+        background-position: center;
+        background-size: cover;
+        height: 100vh;
+        transition: 0.5s;
+    }
+
+    #check:checked~.content {
+        margin-left: 60px;
+    }
+
+    #check:checked~.sidebar .profile_info {
+        display: none;
+    }
+
+    #check {
+        display: none;
+    }
+
+    .mobile_nav {
+        display: none;
+    }
+
+    .dollar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .containers {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         text-align: center;
+    }
+
+    .content .card p {
+        background: white;
+        padding: 18px 20px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        opacity: 0.8;
+        border-radius: 20px;
+    }
+
+    .content_box {
+      background: white;
+      padding: 20px 25px;
+      width: 17%;
+      border-radius: 20px;
+      border: 1px solid;
+      border-color: green;
+      background-image: url(https://media.istockphoto.com/photos/watercolor-textured-background-picture-id887755698?k=20&m=887755698&s=612x612&w=0&h=UcvMcQg07D_WfBT88iOWWXMV5WMRXRM8nqJRXcySUNA=);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .section_one {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    }
+
+#sidebar:hover {
+  width: 160px;
+}
+
+
+.right_section {
+    padding: 180px 30px;
+    background: white;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    width: 50%;
+    background-image: url(https://media.istockphoto.com/photos/watercolor-textured-background-picture-id887755698?k=20&m=887755698&s=612x612&w=0&h=UcvMcQg07D_WfBT88iOWWXMV5WMRXRM8nqJRXcySUNA=);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.left_section {
+    padding: 22px 25px;
+    margin-bottom: 10px;
+    border-radius: 26px;
+}
+
+.material-icons-outlined{
+    font-size: 33px;
+}
+
+    .sidebar {
+        overflow-x: hidden;
+    }
+
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    /* Responsive CSS */
+
+    @media screen and (max-width: 780px) {
+        .sidebar {
+            display: none;
+        }
+
+        #sidebar_btn {
+            display: none;
+        }
+
+        .content {
+            margin-left: 0;
+            margin-top: 0;
+            padding: 10px 20px;
+            transition: 0s;
+        }
+
+        #check:checked~.content {
+            margin-left: 0;
+        }
+
+        .mobile_nav {
+            display: block;
+            width: calc(100% - 0%);
+        }
+
+        .nav_bar {
+            background: #222;
+            width: (100% - 0px);
+            margin-top: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .nav_bar .mobile_profile_image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .nav_bar .nav_btn {
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+            transition: 0.5s;
+            transition-property: color;
+        }
+
+        .nav_bar .nav_btn:hover {
+            color: #19B3D3;
+        }
+
+        .mobile_nav_items {
+            background: #2F323A;
+            display: none;
+        }
+
+        .mobile_nav_items a {
+            color: #fff;
+            display: block;
+            text-align: center;
+            letter-spacing: 1px;
+            line-height: 60px;
+            text-decoration: none;
+            box-sizing: border-box;
+            transition: 0.5s;
+            transition-property: background;
+        }
+
+        .mobile_nav_items a:hover {
+            background: #19B3D3;
+        }
+
+        .mobile_nav_items i {
+            padding-right: 10px;
+        }
+
+        .active {
+            display: block;
+        }
+    }
+</style>
+
+<body>
+
+    <input type="checkbox" id="check">
+    <!--header area start-->
+    <header>
+        <label for="check">
+            <i class="fas fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3><span>Dash-Board</span></h3>
+        </div>
+       
+    </header>
+
+    
+    <div class="mobile_nav">
+        <div class="nav_bar">
+
+            <i class="fa fa-bars nav_btn"></i>
+        </div>
+        <div class="mobile_nav_items">
+            <a href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+            <a href="#"><i class="fas fa-cogs"></i><span>Components</span></a>
+            <a href="#"><i class="fas fa-table"></i><span>Tables</span></a>
+            <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
+            <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
+            <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+        </div>
+    </div>
+    
+    <!--sidebar start-->
+    <div class="sidebar" id=”mySidebar” onmouseover=”toggleSidebar()” onmouseout=”toggleSidebar()”>
+
+        <a href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+        <a href="#"><i class="fas fa-cogs"></i><span>Components</span></a>
+        <a href="#"><i class="fas fa-table"></i><span>Tables</span></a>
+        <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
+        <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
+        <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+        <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
+        <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
+        <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+        <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
+        <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
+        <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+        <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
+        <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+        <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
+        <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
+        <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+    </div>
+    <!--sidebar end-->
+
+
+    <div class="content">
+        <div class="section_one">
+            <div class="right_section">
+                <h1>hello user</h1>
+            </div>
+            <div class="left_section">
+             <div id='myDiv'></div>
+             
+            </div>
+        </div>
+
+
+        <div class="containers">
+           <div class="content_box">
+                <div class="dollar">
+                 <span class="material-icons-outlined">attach_money</span><h1>8742</h1>
+             </div>
+                  <p>sales Income</p>
+            </div>
+            <div class="content_box">
+                <div class="dollar">
+                 <span class="material-icons-outlined">attach_money</span><h1>8742</h1>
+             </div>
+                  <p>sales Income</p>
+            </div>
+           <div class="content_box">
+                <div class="dollar">
+                 <span class="material-icons-outlined">attach_money</span><h1>8742</h1>
+             </div>
+                  <p>sales Income</p>
+            </div>
+          <div class="content_box">
+                <div class="dollar">
+                 <span class="material-icons-outlined">attach_money</span><h1>8742</h1>
+             </div>
+                  <p>sales Income</p>
+            </div>
+        </div>
+        <div class="card">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
+                into electronic typesetting, remaining essentially unchanged.</p>
+        </div>
+        <div class="card">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
+                into electronic typesetting, remaining essentially unchanged.</p>
+        </div>
+        <div class="card">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
+                into electronic typesetting, remaining essentially unchanged.</p>
+        </div>
+    </div>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+ <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+ 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.nav_btn').click(function () {
+                $('.mobile_nav_items').toggleClass('active');
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        var trace1 = {
+            x: [1, 2, 3, 4, 5,6,7],
+            y: [40, 50, 60, 70, 80, 20, 50],
+            name: 'login details data',
+            type: 'scatter'
+        };
+
+        var trace2 = {
+        x: [1, 2, 3, 4, 5,6,7],
+        y: [4, 5, 6, 9, 3, 2, 4],
+        name: 'register details data',
+        yaxis: 'y2',
+        type: 'scatter'
+        };
+ 
+        var data = [trace1, trace2];
+
+        var layout = {
+          title: '',
+          font: {size: 14},
+          yaxis: {title: 'daily login details'},
+          yaxis2: {
+          title: 'daily new register',
+          titlefont: {color: 'rgb(148, 103, 189)'},
+          tickfont: {color: 'rgb(148, 103, 189)'},
+          overlaying: 'y',
+          side: 'right'
+         }
+        };
+
+        var config = {responsive: true}
+
+
+        Plotly.newPlot('myDiv', data, layout, config);
+
+    </script>
+
+</body>
+
+</html>

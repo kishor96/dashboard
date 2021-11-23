@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<style>
+    /* Google Font Link */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 78px;
+        background: white;
+        padding: 6px 14px;
+        z-index: 99;
+        transition: all 0.5s ease;
+    }
+
+    .sidebar.open {
+        width: 250px;
+    }
+
+    .sidebar .logo-details {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .sidebar .logo-details .icon {
+        opacity: 0;
+        transition: all 0.5s ease;
+    }
+
+    .sidebar .logo-details .logo_name {
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        opacity: 0;
+        transition: all 0.5s ease;
+    }
+
+    .sidebar.open .logo-details .icon,
+    .sidebar.open .logo-details .logo_name {
+        opacity: 1;
+    }
+
+    .sidebar .logo-details #btn {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        font-size: 22px;
+        transition: all 0.4s ease;
+        font-size: 23px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.5s ease;
+    }
+
+    .sidebar.open .logo-details #btn {
+        text-align: right;
+    }
+
+    .sidebar i {
+        color: black;
+        height: 60px;
+        min-width: 50px;
+        font-size: 28px;
+        text-align: center;
+        line-height: 60px;
+    }
+
+    .sidebar .nav-list {
+        margin-top: 20px;
+        height: 100%;
+    }
+
+    .sidebar li {
+        position: relative;
+        margin: 8px 0;
+        list-style: none;
+    }
+
+    .sidebar li .tooltip {
+        position: absolute;
+        top: -20px;
+        left: calc(100% + 15px);
+        z-index: 3;
+        background: #fff;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 15px;
+        font-weight: 400;
+        opacity: 0;
+        white-space: nowrap;
+        pointer-events: none;
+        transition: 0s;
+    }
+
+    .sidebar li:hover .tooltip {
+        opacity: 1;
+        pointer-events: auto;
+        transition: all 0.4s ease;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .sidebar.open li .tooltip {
+        display: none;
+    }
+
+    .sidebar li a {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        border-radius: 12px;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.4s ease;
+        background: #white;
+    }
+
+    .sidebar li a:hover {
+        background: #69AA8A;
+    }
+
+    .sidebar li a .links_name {
+        color: black;
+        font-size: 15px;
+        font-weight: 400;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.4s;
+    }
+
+    .sidebar.open li a .links_name {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .sidebar li a:hover .links_name,
+    .sidebar li a:hover i {
+        transition: all 0.5s ease;
+        color: #11101D;
+    }
+
+    .sidebar li i {
+        height: 50px;
+        line-height: 50px;
+        font-size: 18px;
+        border-radius: 12px;
+    }
+
+    .sidebar li.profile {
+        position: fixed;
+        height: 60px;
+        width: 78px;
+        left: 0;
+        bottom: -8px;
+        padding: 10px 14px;
+        background: #1d1b31;
+        transition: all 0.5s ease;
+        overflow: hidden;
+    }
+
+    .sidebar.open li.profile {
+        width: 250px;
+    }
+
+    .sidebar li .profile-details {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    .sidebar li img {
+        height: 45px;
+        width: 45px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-right: 10px;
+    }
+
+    .sidebar li.profile .name,
+    .sidebar li.profile .job {
+        font-size: 15px;
+        font-weight: 400;
+        color: #fff;
+        white-space: nowrap;
+    }
+
+    .sidebar li.profile .job {
+        font-size: 12px;
+    }
+
+    .sidebar .profile #log_out {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        background: #1d1b31;
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        border-radius: 0px;
+        transition: all 0.5s ease;
+    }
+
+    .sidebar.open .profile #log_out {
+        width: 50px;
+        background: none;
+    }
+
+    .home-section {
+        position: relative;
+        background: #E4E9F7;
+        min-height: 100vh;
+        top: 0;
+        left: 78px;
+        width: calc(100% - 78px);
+        transition: all 0.5s ease;
+        z-index: 2;
+    }
+
+    .sidebar.open~.home-section {
+        left: 250px;
+        width: calc(100% - 250px);
+    }
+
+    .home-section .text {
+        display: inline-block;
+        color: #11101d;
+        font-size: 25px;
+        font-weight: 500;
+        margin: 18px
+    }
+
+    .logo {
+        padding: 50px;
+        margin-left: -90px;
+    }
+
+    .header {
+        background-color: white;
+        padding: 15px;
+        width: 97%;
+        overflow: hidden;
+        margin: 0px 20px;
+        border-radius: 10px;
+    }
+
+    .header_items {
+        color: black;
+        font-size: 25px;
+        font-weight: 600;
+        font-style: normal;
+
+    }
+
+    .main_section {
+        width: 97%;
+        margin: 20px 20px;
+        /* padding-top: 20px; */
+    }
+
+    .card {
+        height: 160px;
+        border-radius: 20px;
+        background-color: white;
+    }
+
+    .card4 {
+        height: 160px;
+        border-radius: 20px;
+        background-color: white;
+        margin-top: 25px;
+    }
+
+    .card3 {
+        height: 300px;
+        background-color: white;
+        border-radius: 20px;
+        margin-top: 25px;
+    }
+
+    .logo_name img {
+    position: fixed;
+    margin-top: -70px;
+}
+
+@media (min-width: 600px) {
+i#btn {
+    display: none;
+}}
+
+    .sidebar {
+        overflow: scroll;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    @media (max-width: 600px) {
+        .sidebar li .tooltip {
+            display: none;
+        }
+        .card{
+            margin-bottom: 10px;
+        }
+
+    }
+</style>
+
+<body>
+    <div class="sidebar open">
+        <div class="logo-details">
+            <i class=''></i>
+            <div class="logo_name"><img class="logo" src="images/logo2.jpg" width="250px" height="150px" /></div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+
+            <li>
+                <a href="#">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class='bx bx-chat'></i>
+                    <span class="links_name">Messages</span>
+                </a>
+                <span class="tooltip">Messages</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-pie-chart-alt-2'></i>
+                    <span class="links_name">Analytics</span>
+                </a>
+                <span class="tooltip">Analytics</span>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class='bx bx-cart-alt'></i>
+                    <span class="links_name">Order</span>
+                </a>
+                <span class="tooltip">Order</span>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Setting</span>
+                </a>
+                <span class="tooltip">Setting</span>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Logout</span>
+                </a>
+                <span class="tooltip">logout</span>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Logout</span>
+                </a>
+                <span class="tooltip">logout</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Logout</span>
+                </a>
+                <span class="tooltip">logout</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Logout</span>
+                </a>
+                <span class="tooltip">logout</span>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <nav class="header">
+            <div class="header_items">
+                <h2 class="header_items">Dashboard</h2>
+            </div>
+        </nav>
+
+        <div class="main_section">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card3">
+                        <h1>hello</h1>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card3">
+                          
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card4">
+                        <h3 class="hello">card1</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card4">
+                        <h3 class="hello">card2</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card4">
+                        <h3 class="hello">card3</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card4">
+                        <h3 class="hello">card1</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card4">
+                        <h3 class="hello">card2</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card4">
+                        <h3 class="hello">card3</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="card4">
+                        <h3 class="hello">card1</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card4">
+                        <h3 class="hello">card2</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card4">
+                        <h3 class="hello">card3</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header">
+            <div class="header_items">
+                <h2 class="header_items">footer</h2>
+
+
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let closeBtn = document.querySelector("#btn");
+
+
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+            menuBtnChange();
+        });
+    </script>
+
+        <script type="text/javascript">
+        var trace1 = {
+            x: [1, 2, 3, 4, 5,6,7],
+            y: [40, 50, 60, 70, 80, 20, 50],
+            name: 'login details data',
+            type: 'scatter'
+        };
+        var trace2 = {
+        x: [1, 2, 3, 4, 5,6,7],
+        y: [4, 5, 6, 9, 3, 2, 4],
+        name: 'register details data',
+        yaxis: 'y2',
+        type: 'scatter'
+        };
+        var data = [trace1, trace2];
+        var layout = {
+          title: '',
+          font: {size: 14},
+          yaxis: {title: 'daily login details'},
+          yaxis2: {
+          title: 'daily new register',
+          titlefont: {color: 'rgb(148, 103, 189)'},
+          tickfont: {color: 'rgb(148, 103, 189)'},
+          overlaying: 'y',
+          side: 'right'
+         }
+        };
+        var config = {responsive: true}
+        Plotly.newPlot('myDiv', data, layout, config);
+
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+           dropdown[i].addEventListener("click", function() {
+           this.classList.toggle("active");
+           var dropdownContent = this.nextElementSibling;
+           if (dropdownContent.style.display === "block") {
+           dropdownContent.style.display = "none";
+           } else {
+           dropdownContent.style.display = "block";
+           }
+        });
+      }
+    </script>
+</body>
+
+</html>
